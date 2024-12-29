@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "TTS Server Extension",
+  "version": "1.0",
+  "permissions": ["contextMenus", "storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Set TTS Server URL"
+  }
+}
+
