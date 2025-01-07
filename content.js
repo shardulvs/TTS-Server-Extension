@@ -20,3 +20,4 @@ function highlight(element) {
     element.style.backgroundColor = "";
   }, 300);
 }
+

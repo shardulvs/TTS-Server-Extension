@@ -2,15 +2,34 @@
   "manifest_version": 3,
   "name": "TTS Server Extension",
   "version": "1.0",
-  "permissions": ["contextMenus", "storage", "activeTab"],
-  "host_permissions": ["http://*/*", "https://*/*"],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://bugs.documentfoundation.org/*"],
-      "js": ["content.js"]
+      "matches": [
+        "https://bugs.documentfoundation.org/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content2.js"
+      ]
     }
   ],
   "action": {
