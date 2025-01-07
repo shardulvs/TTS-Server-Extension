@@ -1,3 +1,12 @@
+// Function to create offscreen document if it doesn't exist
+async function createOffscreen() {
+  if (await chrome.offscreen.hasDocument()) return;
+  await chrome.offscreen.createDocument({
+    url: 'offscreen.html',
+    reasons: ['AUDIO_PLAYBACK'],
+    justification: 'Playing audio'
+  });
+}
 // Create context menu
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -30,6 +39,7 @@ function text_to_speech(text, tabId) {
       );
       return;
     }
+    await createOffscreen();
     try {
       // Send the selected text to the server
       const response = await fetch(serverUrl, {
@@ -49,7 +59,7 @@ function text_to_speech(text, tabId) {
       reader.readAsDataURL(audioBlob);
       reader.onloadend = function () {
         const base64Audio = reader.result;
-        chrome.tabs.sendMessage(tabId, {
+        chrome.runtime.sendMessage({
           action: "playAudio",
           audioData: base64Audio,
         });
